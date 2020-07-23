@@ -11,7 +11,7 @@ Entire pipeline with pre-trained transfer learning module.
 * Outputs image class (desk, chair, sofa, table)
 * Finds matching score with sub-class (eg for chair: recliner, loveseat etc) using computer vision (orb feature) and return nearest CAD model
 
-*Go to run/README.md*
+**Go to run/README.md**
 
 ![Workflow](https://github.com/Smandal-physna/image2meshinelearning/blob/master/workflow.png "Flowchart")
 
@@ -22,4 +22,5 @@ Developers end to train model to be used/consumed by run. Contains scripts to:
 * Use tagged synthetic data to train transfer learning VGG classifier
 * Hyper parameter tune the classifier using Grid Search
 * Save tuned model
-*Go to train/README.md*
+
+**Go to train/README.md**
