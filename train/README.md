@@ -3,14 +3,14 @@
 * OBJ files should be in format:
     * Input folder
         o Class 1
-            x Class 1 subclass 1
-            x Class 1 subclass 2
-            ...
+          * Class 1 subclass 1
+          * Class 1 subclass 2
+          * ...
         o Class 2
-            x .....
-            ...
+          * .....
+         ...
          o Class n
-              x Class n subclass 1
+           * Class n subclass 1
     
 * Assigns random texture to the object
     * picks texture from folder 'texture/'
