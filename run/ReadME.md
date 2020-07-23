@@ -1,4 +1,4 @@
-The environment has been setup in GCP project image2model with instance p-ds-1. Associated conda environment: detetron2
+##The environment has been setup in GCP project image2model with instance p-ds-1. Associated conda environment: detetron2##
 
 To setup:
 Create conda environment 
