@@ -1,16 +1,16 @@
 **gensynth-blender.py: Uses blender script to generate synthetic data from OBJ files.**
 
 * OBJ files should be in format:
-    * Input folder
-         o Class 1
-               * Class 1 subclass 1
-               * Class 1 subclass 2
-               * ...
-         o Class 2
-               * .....
-         ...
-         o Class n
-               * Class n subclass 1
+  * Input folder
+      * Class 1
+            * Class 1 subclass 1
+            * Class 1 subclass 2
+            * ...
+      * Class 2
+            * .....
+       * ...
+      * Class n
+            * Class n subclass 1
     
 * Assigns random texture to the object
     * picks texture from folder 'texture/'
