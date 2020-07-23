@@ -1,0 +1,105 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
+from keras import applications
+from keras.preprocessing.image import ImageDataGenerator
+from keras import optimizers
+from keras.models import Sequential, load_model
+from keras.layers import Dropout, Flatten, Dense, Conv2D
+from keras.layers.core import Flatten, Dense, Dropout
+from keras.layers.convolutional import Convolution2D, MaxPooling2D, ZeroPadding2D
+from keras.utils import multi_gpu_model
+from sklearn.utils import class_weight
+from matplotlib import pyplot as plt
+import cv2, numpy as np
+import tensorflow as tf
+import sys
+
+img_width, img_height = 224, 224
+
+top_model_weights_path = '128_128_2_2_4classes.h5'
+num_classes = 4
+
+model = applications.VGG16(weights='imagenet', include_top=False,input_shape = (img_height,img_width,3))
+print('Model saved.')
+#exit(0)
+# build a classifier model to put on top of the convolutional model
+strategy = tf.distribute.MirroredStrategy()
+print('Number of devices: {}'.format(strategy.num_replicas_in_sync))
+with strategy.scope():
+
+top_model = Sequential()
+print(model.output_shape[1:],model.output_shape)
+top_model.add(Flatten(input_shape=model.output_shape[1:]))
+top_model.add(Dense(128, activation='relu'))
+top_model.add(Dropout(0.2))
+top_model.add(Dense(128, activation='relu'))
+top_model.add(Dropout(0.3))
+top_model.add(Dense(num_classes, activation='softmax'))
+
+# note that it is necessary to start with a fully-trained
+# classifier, including the top classifier,
+# in order to successfully do fine-tuning
+top_model.load_weights(top_model_weights_path)
+
+# add the model on top of the convolutional base
+mb = Sequential()
+mb.add(model)
+mb.add(top_model)
+# model.add(top_model)
+#     model = mb
+mb.load_weights('top_model_weights_path')
+exit(0)
+
+# In[8]:
+
+
+labels = (train_generator.class_indices)
+print(labels)
+
+image2 = cv2.imread(sys.argv[1])
+if image2.shape[0]!=3 or image2.shape[1]!=img_width:
+    image2 = cv2.resize(image2,(img_height,img_width))
+
+classes = model.predict(image2)[0]
+print('************************** The furniture is: ',labels[classes],' !! ***************************')
+
+
+############ FIND SUB-CLASS ON FOUND SUPER CLASS
+cand = []
+for r,d,f in os.walk('subclass-check/'+labels[classes]):
+    for files in f:
+        if not ('png' in files and 'model-new.obj' in r):
+            continue
+        img1 = numpy.asarray(cv2.imread(r+'/'+files))
+        img2 = image2
+        surf=cv2.xfeatures2d.SURF_create()
+
+        # find the keypoints and descriptors with SURF
+        kp1, des1 = surf.detectAndCompute(img1,None)
+        kp2, des2 = surf.detectAndCompute(img2,None)
+
+
+        bf = cv2.BFMatcher()
+        matches = bf.knnMatch(des1,des2, k=2)
+        print(r+'/'+files)
+        # Apply ratio test
+
+        good = []
+        for m,n in matches:
+            if m.distance < 0.75*n.distance:
+                good.append([m])
+        a=len(good)
+        percent=(a*100)/len(kp2)
+        print("{} % similarity".format(percent))
+        if percent >= 75.00:
+            print('Match Found')
+        if percent < 75.00:
+            print('Match not Found')
+        cand.append([percent,files])
+
+sorted(cand, key=lambda x: x[0])
+print("subfile:",cand)

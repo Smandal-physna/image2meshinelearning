@@ -1,0 +1,11 @@
+--2020-07-23 00:16:27--  https://specials-images.forbesimg.com/imageserve/5eea485bdb3b680006a1e736/960x0.jpg?cropX1=0
+Resolving specials-images.forbesimg.com (specials-images.forbesimg.com)... 151.101.194.49, 151.101.130.49, 151.101.66.49, ...
+Connecting to specials-images.forbesimg.com (specials-images.forbesimg.com)|151.101.194.49|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 114659 (112K) [image/jpeg]
+Saving to: ‘960x0.jpg?cropX1=0’
+
+960x0.jpg?cropX1=0                     0%[                                                                    ]       0  --.-KB/s               960x0.jpg?cropX1=0                   100%[===================================================================>] 111.97K  --.-KB/s    in 0.02s   
+
+2020-07-23 00:16:27 (4.73 MB/s) - ‘960x0.jpg?cropX1=0’ saved [114659/114659]
+
