@@ -1,10 +1,14 @@
 ##The environment has been setup in GCP project image2model with instance p-ds-1. Associated conda environment: detetron2##
 
 To setup:
-Create conda environment 
-Install all associated files from:
-pip install -r requirements.txt
-install detectron2 [https://colab.research.google.com/drive/16jcaJoc6bCFAQ96jDe2HwtXj7BMD_-m5]
+* Create conda environment 
+* Install all associated files from:
+* pip install -r requirements.txt
+* Install CUDA(recomended 10.2 for detectron2): Can be a bit tricky. refer to my doc to install in GCP: 
+ * [https://docs.google.com/document/d/1zuymbahC4TVNKIxTQM8PLdZv4P2kWsDtjiYYtfPXdU8/edit?usp=sharing]
+* Install Pytorch, torchvision.[https://pytorch.org/]
+ * Current GCP runs on: conda install pytorch torchvision cudatoolkit=10.2 -c pytorch
+* install detectron2 [https://colab.research.google.com/drive/16jcaJoc6bCFAQ96jDe2HwtXj7BMD_-m5]
 
 Run
 * Run run-detectron2.py <input-image> <output-image> (Gives segmented image)
