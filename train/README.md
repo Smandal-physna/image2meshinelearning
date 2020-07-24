@@ -24,6 +24,7 @@
 
 **prelim-train-vgg.ipynb: Trains fully connected (final) layers of transfer learning model. Output: .h5 file contained weights of trained model**
 Ref: [https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html]
+Does keras weighted balance based on data skew
 
 **vgg-fine-tuning.ipynb: Loads weights trained in the previous layer and fine tunes entire model. Output: model to be used in 'run'**
 
